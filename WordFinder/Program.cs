@@ -9,19 +9,20 @@ namespace WordFinder
         {
             var matrix = new List<string>
             {
-                "abcdcczzyy",
-                "fgwiohzztu",
-                "chillizzyy",
-                "pqnsdltuyy",
-                "uvdxyluzyy"
+                "abcdcczzyyzzsnowz",
+                "fgwiohzztunsnsnow",
+                "chillizzyyonoztut",
+                "pqnsdltuyysowzuzt",
+                "uvdxyluzyyzwzzbc1"
             };
 
             var wordFinder = new WordFinder(matrix);
 
-            var wordsToFind = new List<string> {"cold", "chill", "wind", "snow", "tu"};
+            var wordsToFind = new List<string> {"cold", "chill", "wind", "snow", "tu", "al", "bc", "dd1", "dd2", "tt1", "tt2", "yyt", "wwe"};
 
             var foundWords =  wordFinder.Find(wordsToFind);
 
+            Console.WriteLine("\nTop 10 words found");
             foreach (var foundWord in foundWords) {
                 Console.WriteLine(foundWord);
             }

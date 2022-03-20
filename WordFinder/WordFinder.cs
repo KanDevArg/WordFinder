@@ -17,11 +17,9 @@ namespace WordFinder
             var columnStreams = new string[] { };
             Array.Resize(ref columnStreams, matrix.First().Length);
 
-            foreach (var rowStream in matrix)
-            {
+            foreach (var rowStream in matrix) {
                 var streamCharArray = rowStream.ToCharArray();
-                for (var i = 0; i < rowStream.Length; i++)
-                {
+                for (var i = 0; i < rowStream.Length; i++) {
                     columnStreams[i] += streamCharArray[i];
                 }
             }
@@ -37,8 +35,6 @@ namespace WordFinder
             var dict = 
                 words.ToDictionary(w => w, w => 0);
             
-            // var stopWatch = Stopwatch.StartNew(); 
-            
             foreach (var word in words) {
                 foreach (var stream in _matrix)
                 {
@@ -46,29 +42,18 @@ namespace WordFinder
                         dict[word]++;
                     }
                 }
-            } 
-            // Console.WriteLine("foreach loop execution time = {0} seconds\n", stopWatch.Elapsed.TotalSeconds);  
+            }
 
-            // var buffer = new ConcurrentQueue<string>();
-            // Parallel.ForEach(words, word =>
-            // {
-            //     foreach (var stream in _matrix)
-            //     {
-            //         if (stream.Replace(word, "").Length != stream.Length)
-            //         {
-            //             buffer.Enqueue(word);
-            //             //dict[word]++;
-            //         }
-            //     }
-            // });
-            //
-            // while (buffer.TryDequeue(out var word)) {
-            //     dict[word]++;
-            // }
-            //
-            // Console.WriteLine("Parallel foreach loop execution time = {0} seconds\n", stopWatch.Elapsed.TotalSeconds);
 
-            return dict.OrderByDescending(key => key.Value).Take(10).Select(kv=> kv.Key).ToList();
+            foreach (var kv in dict)
+            {
+                Console.WriteLine($"{kv.Key} => occurrences: {kv.Value}");
+            }
+            
+            return dict.OrderByDescending(key => key.Value)
+                .Where(kv=> kv.Value >0)
+                .Take(10)
+                .Select(kv=> kv.Key).ToList();
         }
     }
 }
